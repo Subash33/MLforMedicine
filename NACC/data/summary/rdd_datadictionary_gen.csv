@@ -1,0 +1,54 @@
+VariableName,Form,VariableType,ShortDescriptor,DataType,AllowableCodes
+ADGCGWAS,gen,ADGC,GWAS available from ADGC (y/n),Numeric cross-sectional," 0 = No
+1 = Yes"
+ADGCEXOM,gen,ADGC,ExomeChip available at ADGC (y/n),Numeric cross-sectional," 0 = No
+1 = Yes"
+ADGCRND,gen,ADGC,ADGC data-selection round,Character cross-sectional,"ADC 1 = Round 1
+ADC 2 = Round 2
+ADC 3 = Round 3
+ADC 4 = Round 4
+ADC 5 = Round 5
+ADC 6 = Round 6
+ADC 7 = Round 7
+ADC 8 = Round 8
+ADC 9 = Round 9
+ADC 10 = Round 10
+AA = African American round
+88 = Not applicable/no genotype data available
+99 = Missing/ could not be determined"
+ADGCEXR,gen,ADGC,ExomeChip genotyping round,Character cross-sectional,"ADC 7 = Round 7 
+ADC 8 = Round 8 
+Exome1 = Exome round 1 
+Exome2 = Exome round 2 
+Exome3 = Exome round 3
+88 = Not applicable/no genotype data available
+99 = Missing/ could not be determined"
+NGDSGWAS,gen,ADGC,GWAS available at NIAGADS (y/n),Numeric cross-sectional," 0 = No
+1 = Yes"
+NGDSEXOM,gen,ADGC,ExomeChip available at NIAGADS (y/n),Numeric cross-sectional," 0 = No
+1 = Yes"
+NGDSWGS,gen,ADGC,Whole genome sequencing available at NIAGADS (y/n),Numeric cross-sectional," 0 = No
+1 = Yes"
+NGDSWES,gen,ADGC,Whole exome sequencing available at NIAGADS (y/n),Numeric cross-sectional," 0 = No
+1 = Yes"
+NGDSGWAC,gen,ADGC,NIAGADS GWAS accession number,Character cross-sectional,"Prefix 'NG"" followed by 5 numerals 
+88 = Not applicable/no genotype data available"
+NGDSEXAC,gen,ADGC,NIAGADS ExomeChip accession number,Character cross-sectional,"Prefix 'NG"" followed by 5 numerals 
+88 = Not applicable/no genotype data available"
+NGDSWGAC,gen,ADGC,NIAGADS whole genome sequencing accession number,Character cross-sectional,"Prefix 'NG"" followed by 5 numerals 
+88 = Not applicable/no genotype data available"
+NCDSWEAC,gen,ADGC,NIAGADS whole exome sequencing accession number,Character cross-sectional,"Prefix 'NG"" followed by 5 numerals 
+88 = Not applicable/no genotype data available"
+NACCNCRD,gen,NCRAD,Samples are available from NCRAD (y/n),Numeric cross-sectional," 0 = No
+1 = Yes"
+NACCAPOE,gen,NACC derived,APOE genotype,Numeric cross-sectional," 1 = e3,e3 
+2 = e3,e4 
+3 = e3,e2 
+4 = e4,e4 
+5 = e4,e2 
+6 = e2,e2 
+9 = Missing/ unknown/ not assessed"
+NACCNE4S,gen,NACC derived,Number of APOE e4 alleles,Numeric cross-sectional," 0 = No e4 allele 
+1 = 1 copy of e4 allele 
+2 = 2 copies of e4 allele 
+9 = Missing/ unknown/ not assessed"

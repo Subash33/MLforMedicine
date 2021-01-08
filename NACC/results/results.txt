@@ -1,0 +1,4 @@
+
+For: full_CN_AD_RandomForest_100
+Averaged ACC=0.886206896551724
+Averaged F1=0.8830123819409236
