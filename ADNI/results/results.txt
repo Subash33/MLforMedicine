@@ -1,0 +1,25 @@
+For: full_CN_AD_RandomForest_200 #Selected genes
+Averaged ACC=0.6878951486697965
+Averaged F1=0.5876906695477577
+
+For: full_CN_AD_RandomForest_200 #T-test based features (top 200)
+Averaged ACC=0.7507198748043817
+Averaged F1=0.7101004109655892
+
+
+For: partial_CN_AD_RandomForest_200 # T-test based features (top 50)
+Averaged ACC=0.7561737089201876
+Averaged F1=0.7279929673051829
+
+
+For: partial_CN_AD_RandomForest_200
+Averaged ACC=0.7525391236306729
+Averaged F1=0.7268576432648992
+
+For: full_CN_AD_RandomForest_200
+Averaged ACC=0.7487636932707354
+Averaged F1=0.70787935648439
+
+For: partial_CN_AD_RandomForest_200
+Averaged ACC=0.7567136150234741
+Averaged F1=0.728712796826436
