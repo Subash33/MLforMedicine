@@ -23,22 +23,15 @@ from sklearn.preprocessing import StandardScaler
 from classifiers import classifier
 from utilities import plot_SHAP, plot_ROC, save_results
 import os
-featNum = 50
+
 def train_ADNI(features,clf,estimators,classes,repeat,data_path,results_path,plots_path):
     df_gene_dx = pd.read_csv(os.path.join(data_path, classes+'.csv'))
-    importance_file = pd.read_csv(os.path.join(results_path,'full_'+ classes +'_RandomForest_100.csv')).sort_values('importance',ascending= False)
-    partial_cols = list(importance_file.loc[0:featNum,'Unnamed: 0'])
-    #df_gene_dx = df_gene_dx.drop(0)
+    ttest_df = pd.read_csv(cfg.ttest)
+    important_probes =  ttest_df.sort_values(classes)['PTID'][0:features]
     cols= list(df_gene_dx.columns) 		
-    df_partial = df_gene_dx.loc[:,partial_cols] # until we decide on which column to choose
-    df_partial['DX'] = df_gene_dx['DX']
-    df_full = df_gene_dx.loc[:,cols[1]:cols[-1]]
-    df_full['DX'] = df_gene_dx['DX']
-    if features == 'full':
-        df = df_full
-        
-    if features == 'partial':
-        df = df_partial
+    df = df_gene_dx.loc[:,important_probes] # until we decide on which column to choose
+    df['DX'] = df_gene_dx['DX']
+   
     cols = df.columns[:-1]
 #Counter({'CN': 244, 'Dementia': 113, 'MCI': 377, nan: 10}) #labels distribution
     df_CN = df[df.DX=='CN'] 
@@ -85,7 +78,7 @@ def train_ADNI(features,clf,estimators,classes,repeat,data_path,results_path,plo
     importance = np.zeros((repeat,5,numFeature))
     TPRS = []
     AUCS = []
-    fname = features+'_'+classes+'_'+clf+'_'+str(estimators)
+    fname = str(features)+'_'+classes+'_'+clf+'_'+str(estimators)
     for i in range(repeat):
         j = 0
         tprs = []
@@ -133,7 +126,7 @@ if  __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--features', type=str, help='Portion of features used. Options:[full, partial] ', default='full')
+    parser.add_argument('--features', type=int, help='Number of features to select', default=200)
     parser.add_argument('--classifier', type=str, help='ML classifier to use. Options:[RandomForest, GradientBoosting] ', default='RandomForest')
     parser.add_argument('--estimators', type=int, help='number of estimators for classfiers', default=100)
     parser.add_argument('--repeat', type=int, help='number of experiments run', default=10)
