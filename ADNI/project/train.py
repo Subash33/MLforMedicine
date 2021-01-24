@@ -22,12 +22,15 @@ from sklearn.metrics import f1_score
 from sklearn.preprocessing import StandardScaler
 from classifiers import classifier
 from utilities import plot_SHAP, plot_ROC, save_results
-
+import os
+featNum = 50
 def train_ADNI(features,clf,estimators,classes,repeat,data_path,results_path,plots_path):
-    df_gene_dx = pd.read_csv(data_path)
+    df_gene_dx = pd.read_csv(os.path.join(data_path, classes+'.csv'))
+    importance_file = pd.read_csv(os.path.join(results_path,'full_'+ classes +'_RandomForest_100.csv')).sort_values('importance',ascending= False)
+    partial_cols = list(importance_file.loc[0:featNum,'Unnamed: 0'])
     #df_gene_dx = df_gene_dx.drop(0)
     cols= list(df_gene_dx.columns) 		
-    df_partial = df_gene_dx.loc[:,cols[1]:cols[54]] # until we decide on which column to choose
+    df_partial = df_gene_dx.loc[:,partial_cols] # until we decide on which column to choose
     df_partial['DX'] = df_gene_dx['DX']
     df_full = df_gene_dx.loc[:,cols[1]:cols[-1]]
     df_full['DX'] = df_gene_dx['DX']
