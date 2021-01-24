@@ -28,11 +28,9 @@ def train_ADNI(features,clf,estimators,classes,repeat,data_path,results_path,plo
     df_gene_dx = pd.read_csv(os.path.join(data_path, classes+'.csv'))
     ttest_df = pd.read_csv(cfg.ttest)
     important_probes =  ttest_df.sort_values(classes)['PTID'][0:features]
-    cols= list(df_gene_dx.columns) 		
     df = df_gene_dx.loc[:,important_probes] # until we decide on which column to choose
+    cols = df.columns
     df['DX'] = df_gene_dx['DX']
-   
-    cols = df.columns[:-1]
 #Counter({'CN': 244, 'Dementia': 113, 'MCI': 377, nan: 10}) #labels distribution
     df_CN = df[df.DX=='CN'] 
     df_MCI = df[df.DX=='MCI']
