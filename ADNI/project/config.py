@@ -10,6 +10,7 @@ cfg = edict()
 #cfg.data = '/Users/subashkhanal/Desktop/MLforAlzheimers/data/ADNI/genetics/data_prep/CN_MCI.csv'
 #cfg.data = '/Users/subashkhanal/Desktop/MLforAlzheimers/data/ADNI/genetics/data_prep/MCI_AD.csv'
 cfg.data = '/Users/subashkhanal/Desktop/MLforAlzheimers/data/ADNI/genetics/data_prep/'
+cfg.filtered_ttest = '/Users/subashkhanal/Desktop/MLforAlzheimers/data/ADNI/genetics/stats/ttest_p_filtered_genes.csv'
 cfg.ttest = '/Users/subashkhanal/Desktop/MLforAlzheimers/data/ADNI/genetics/stats/t_test_geneExpr.csv'
 ### Storage for results 
 cfg.results = '/Users/subashkhanal/Desktop/MLforAlzheimers/ADNI/results/'

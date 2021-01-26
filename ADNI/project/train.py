@@ -25,13 +25,14 @@ from utilities import plot_SHAP, plot_ROC, save_results
 import os
 
 def train_ADNI(features,clf,estimators,classes,repeat,data_path,results_path,plots_path):
-    df_gene_dx = pd.read_csv(os.path.join(data_path, classes+'.csv'))
-    ttest_df = pd.read_csv(cfg.ttest)
-    important_probes =  ttest_df.sort_values(classes)['PTID'][0:features]
+    df_gene_dx = pd.read_csv(os.path.join(data_path, classes+'_filtered.csv')) #Remove _filtered to run experiments for un-preprocessed data
+    ttest_df = pd.read_csv(cfg.filtered_ttest) #Use cfg.ttest for Un-preprocessed experiment
+    important_probes =  ttest_df.sort_values(classes)['Genes'][0:features]
     df = df_gene_dx.loc[:,important_probes] # until we decide on which column to choose
     cols = df.columns
     df['DX'] = df_gene_dx['DX']
-#Counter({'CN': 244, 'Dementia': 113, 'MCI': 377, nan: 10}) #labels distribution
+#Counter({'CN': 244, 'Dementia': 113, 'MCI': 377, nan: 10}) #labels distribution (Unfiltered based on RIN)
+#{'CN': 118, 'Dementia': 56, 'MCI': 196, nan: 6}) #filtered based on  RIN
     df_CN = df[df.DX=='CN'] 
     df_MCI = df[df.DX=='MCI']
     df_AD= df[df.DX=='Dementia']
@@ -76,7 +77,7 @@ def train_ADNI(features,clf,estimators,classes,repeat,data_path,results_path,plo
     importance = np.zeros((repeat,5,numFeature))
     TPRS = []
     AUCS = []
-    fname = str(features)+'_'+classes+'_'+clf+'_'+str(estimators)
+    fname = 'filtered'+str(features)+'_'+classes+'_'+clf+'_'+str(estimators)
     for i in range(repeat):
         j = 0
         tprs = []
