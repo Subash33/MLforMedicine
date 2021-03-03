@@ -11,7 +11,7 @@ https://github.com/linbrainlab/machinelearning.git
 @author: subashkhanal
 """
 
-from config import cfg
+from config import cfg, HyperParameters
 import pandas as pd
 import numpy as np
 from sklearn.metrics import roc_curve, auc
@@ -23,6 +23,7 @@ from sklearn.preprocessing import StandardScaler
 from classifiers import classifier
 from utilities import plot_SHAP, plot_ROC, save_results
 import os
+import itertools
 
 def train_ADNI(features,clf,estimators,classes,repeat,data_path,results_path,plots_path):
     df_gene_dx = pd.read_csv(os.path.join(data_path, classes+'_filtered.csv')) #Remove _filtered to run experiments for un-preprocessed data
@@ -130,18 +131,35 @@ if  __name__ == '__main__':
     parser.add_argument('--estimators', type=int, help='number of estimators for classfiers', default=100)
     parser.add_argument('--repeat', type=int, help='number of experiments run', default=10)
     parser.add_argument('--classes', type=str, help='Binary classes to perform classification for. Options:[CN_MCI, CN_AD, MCI_AD]', default='CN_AD')
-    
+    parser.add_argument('--tuning', type=str, help='To perform hyperparameter sweep or not. Options:[sweep, no_sweep]', default='no_sweep')    
     args = parser.parse_args()
     
-    acc, f1, tprs, aucs, importance = train_ADNI(features = args.features,
-               clf = args.classifier,
-               estimators = args.estimators,
-               classes = args.classes,
-               repeat = args.repeat,
-               data_path = cfg.data,
-               results_path = cfg.results,
-               plots_path = cfg.plots         
+    if args.tuning == 'no_sweep':
+        acc, f1, tprs, aucs, importance = train_ADNI(features = args.features,
+                clf = args.classifier,
+                estimators = args.estimators,
+                classes = args.classes,
+                repeat = args.repeat,
+                data_path = cfg.data,
+                results_path = cfg.results,
+                plots_path = cfg.plots         
                )
     
+    if args.tuning == 'sweep':
+        params = list(itertools.product(*HyperParameters.params))
+        for hp in params:
+            print("For parameters:",hp)
+            acc, f1, tprs, aucs, importance = train_ADNI(features = hp[0],
+                clf = hp[1],
+                estimators = hp[2],
+                classes = hp[3],
+                repeat = cfg.repeat,
+                data_path = cfg.data,
+                results_path = cfg.results,
+                plots_path = cfg.plots         
+               )
+            print(acc, f1, tprs, aucs, importance)
+
+
     
  
