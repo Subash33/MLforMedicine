@@ -28,6 +28,7 @@ featNum = 50 #Number of features taken for partial features based training
 def train_NACC(features,clf,estimators,classes,repeat,data_path,results_path,plots_path):
     
     df_mri_dx = pd.read_csv(data_path)
+    df_mri_dx = df_mri_dx.drop_duplicates(subset='NACCID', keep="first")
     importance_file = pd.read_csv(os.path.join(results_path,'full_'+ classes +'_RandomForest_300.csv')).sort_values('importance',ascending= False)
     partial_cols = list(importance_file.loc[0:featNum,'Unnamed: 0'])
     df_partial = df_mri_dx.loc[:,partial_cols] # until we decide on which column to choose
